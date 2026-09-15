@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Xautoposter — Xの反応を、発信の手がかりに。</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23132631'/%3E%3Ccircle cx='20' cy='20' r='12' fill='none' stroke='%2379ddbb'/%3E%3Cpath d='M20 20L29 11M20 8V32M8 20H32' stroke='%2379ddbb'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+  <script src="/static/experiments.js" defer></script>
+  <link rel="stylesheet" href="/static/experiments.css">
+</head>
+<body>
+  <a class="skip" href="#main">本文へ移動</a>
+  <aside class="sidebar">
+    <a class="brand" href="#radar" data-nav="radar" aria-label="Xautoposter ホーム"><span class="brand-symbol">↗</span><span>Xautoposter<small>RESEARCH WORKSPACE</small></span></a>
+    <div class="workspace-label">WORKSPACE <span>P0</span></div>
+    <nav aria-label="メインナビゲーション">
+      <button data-nav="experiments" class="nav-item"><span class="nav-icon">↻</span>自分の発信・改善</button>
+      <button data-nav="radar" class="nav-item active"><span class="nav-icon">◉</span>急上昇レーダー<span class="nav-arrow">↗</span></button>
+      <button data-nav="analysis" class="nav-item"><span class="nav-icon">▥</span>投稿分析</button>
+      <button data-nav="library" class="nav-item"><span class="nav-icon">▧</span>分析ライブラリ<span id="saved-count" class="nav-count">0</span></button>
+    </nav>
+    <div class="sidebar-rule"></div>
+    <button data-nav="settings" class="nav-item"><span class="nav-icon">⚙</span>収集設定</button>
+    <button data-action="import" class="nav-item"><span class="nav-icon">↥</span>データを取り込む</button>
+    <div class="sidebar-bottom">
+      <div class="local-status"><span class="status-dot"></span>LOCAL WORKSPACE</div>
+      <p>観測を残す。<br>仮説は、根拠とともに。</p>
+      <div class="sidebar-foot"><span>READ ONLY</span><span>v0.1.0</span></div>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="breadcrumb">ワークスペース <span>/</span> <strong id="page-name">急上昇レーダー</strong></div>
+      <div class="top-actions"><span id="data-badge" class="badge neutral">データ未登録</span><button class="icon-button" data-action="refresh" aria-label="保存データの表示を更新">↻</button></div>
+    </header>
+    <main id="main" tabindex="-1"><div class="loading">ワークスペースを読み込んでいます…</div></main>
+    <footer class="app-footer"><span>Xautoposter · 投稿し、反応から学ぶ</span><span>公開はXで操作 · このアプリから自動送信しません</span></footer>
+  </div>
+  <dialog id="import-dialog" aria-labelledby="import-title">
+    <form id="import-form">
+      <div class="dialog-header"><div><div class="eyebrow">BRING YOUR OBSERVATIONS</div><h2 id="import-title">データを取り込む</h2></div><button type="button" class="icon-button" data-action="close-import" aria-label="閉じる">×</button></div>
+      <p class="muted">投稿と観測時刻を一緒に保存します。過去の観測値を追加すると、時系列として比較できます。</p>
+      <div class="form-grid">
+        <label>データセット名<input name="name" required maxlength="100" placeholder="例：セキュリティ領域の観測" value="手動取り込み"></label>
+        <label>データ種別<select name="provenance"><option value="imported">実データの取り込み（内容は未検証）</option><option value="synthetic">合成データ・動作確認用</option></select></label>
+        <label>形式<select name="format"><option value="json">JSON</option><option value="csv">CSV</option></select></label>
+        <label>保存先<select name="dataset" id="import-dataset"><option value="">新しいデータセット</option></select></label>
+      </div>
+      <label class="file-label">CSV / JSONファイル · 最大4MB<input type="file" id="import-file" accept=".json,.csv,application/json,text/csv"></label>
+      <label>データを貼り付け<textarea name="text" rows="8" required spellcheck="false" placeholder='{"posts":[{"id":"123", "author_id":"456", "text":"投稿本文", "topic":"テーマ", "created_at":"2026-09-12T00:00:00Z", "snapshots":[{"observed_at":"2026-09-12T01:00:00Z", "like_count":10}]}]}'></textarea></label>
+      <details><summary>形式と欠損の扱い</summary><p class="small muted">日時はタイムゾーン付きISO形式。CSVは1行＝1観測。必須列：id, author_id, text, topic, created_at, observed_at。言語(lang)・形式(media_type: text/image/video/mixed)が不明な投稿は比較から除きます。空欄の指標は不明のまま保存。JSONではcounts配列に話題全体の件数窓を追加できます。</p></details>
+      <div class="dialog-footer"><div><button type="button" class="text-button" data-action="template-json">合成JSON見本 ↓</button><button type="button" class="text-button" data-action="template-csv">合成CSV見本 ↓</button></div><button type="submit" class="button primary">取り込んで分析する ↗</button></div>
+      <div id="import-error" class="form-error" role="alert"></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

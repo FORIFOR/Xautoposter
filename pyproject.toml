@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xautoposter"
+version = "0.1.0"
+description = "Local X research: observed momentum, matched comparisons, and traceable evidence."
+requires-python = ">=3.11"
+dependencies = ["fastapi>=0.141,<0.142", "uvicorn>=0.52,<0.53", "httpx>=0.28,<0.29", "pydantic>=2.13,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=9,<10", "playwright>=1.62,<2"]
+
+[project.scripts]
+xautoposter = "xautoposter.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["xautoposter*"]
+
+[tool.setuptools.package-data]
+xautoposter = ["web/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

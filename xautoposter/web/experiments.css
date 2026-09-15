@@ -1,0 +1,6 @@
+.experiment-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px;align-items:start}
+.experiment-content{min-width:0}.experiment-form{display:flex;flex-direction:column;gap:18px;margin-top:16px}.experiment-form>.button{align-self:flex-start}
+.experiment-list{display:flex;flex-direction:column;gap:12px}.experiment-item{padding:15px;border:1px solid var(--line);border-radius:8px;text-align:left;background:white;display:flex;flex-direction:column;gap:10px;width:100%;overflow-wrap:anywhere;line-height:1.7}.experiment-item.selected{border-color:var(--green);background:var(--mint)}.experiment-item .badge{align-self:flex-start}.experiment-item small{font-size:10px;color:var(--muted)}
+.history-json{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;line-height:1.7}.preserve-lines{white-space:pre-wrap;overflow-wrap:anywhere}.experiment-content details{margin-top:18px}.experiment-content .source-meta{margin-top:22px}
+@media(max-width:1100px){.experiment-layout{grid-template-columns:1fr}.experiment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.experiment-list{grid-template-columns:1fr}.experiment-content .source-buttons{flex-direction:column;align-items:stretch}}

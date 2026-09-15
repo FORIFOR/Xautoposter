@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img">
+<title>機能名に使う場面を足す。個人開発の紹介文、架空の書き換え例3つ。</title>
+<rect width="1600" height="1000" fill="#102032"/>
+<rect x="72" y="56" width="7" height="140" rx="3" fill="#68D9AD"/>
+<text x="106" y="108" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="29" font-weight="500" fill="#A6D9C7">個人開発の紹介文・書き換え例</text>
+<text x="102" y="187" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="66" font-weight="700" fill="#FFFFFF">機能名に「使う場面」を足す</text>
+<rect x="64" y="240" width="1472" height="570" rx="28" fill="#FFFFFF"/>
+<text x="104" y="295" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="28" font-weight="600" fill="#576675">機能名</text>
+<text x="707" y="295" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="28" font-weight="600" fill="#176448">使う場面まで</text>
+<rect x="668" y="326" width="840" height="144" rx="18" fill="#EAF6F0"/>
+<text x="104" y="367" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="27" font-weight="600" fill="#627282">01  CSV出力</text>
+<text x="104" y="427" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="43" font-weight="600" fill="#102032">CSV出力を追加</text>
+<path d="M587 400 L629 400" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<path d="M618 389 L629 400" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<path d="M618 411 L629 400" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<text x="706" y="381" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="44" font-weight="600" fill="#163329">月末の集計で、一覧を</text>
+<text x="706" y="438" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="44" font-weight="600" fill="#163329">いつもの表計算へ</text>
+<rect x="668" y="484" width="840" height="144" rx="18" fill="#EAF6F0"/>
+<text x="104" y="525" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="27" font-weight="600" fill="#627282">02  検索</text>
+<text x="104" y="585" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="43" font-weight="600" fill="#102032">検索機能を追加</text>
+<path d="M587 558 L629 558" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<path d="M618 547 L629 558" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<path d="M618 569 L629 558" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<text x="706" y="539" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="44" font-weight="600" fill="#163329">メモが増えても、キーワードで</text>
+<text x="706" y="596" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="44" font-weight="600" fill="#163329">必要な1件へ</text>
+<rect x="668" y="642" width="840" height="144" rx="18" fill="#EAF6F0"/>
+<text x="104" y="683" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="27" font-weight="600" fill="#627282">03  通知</text>
+<text x="104" y="743" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="43" font-weight="600" fill="#102032">通知機能を追加</text>
+<path d="M587 716 L629 716" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<path d="M618 705 L629 716" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<path d="M618 727 L629 716" fill="none" stroke="#73A591" stroke-width="4" stroke-linecap="round"/>
+<text x="706" y="697" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="44" font-weight="600" fill="#163329">締切が近づいたら通知。</text>
+<text x="706" y="754" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="44" font-weight="600" fill="#163329">予定を見直すきっかけに</text>
+<text x="80" y="866" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="32" font-weight="500" fill="#FFFFFF">実際の機能・条件に合わせて書く。操作が分かる画面も添える。</text>
+<text x="80" y="915" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="25" font-weight="400" fill="#B3C4D2">※架空の紹介文例です。製品の実装・効果を示すものではありません。</text>
+<rect x="80" y="952" width="13" height="13" rx="3" fill="#68D9AD"/>
+<text x="106" y="967" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif" font-size="23" font-weight="500" fill="#C1CED9">フォリフォリ｜AIと個人開発</text>
+</svg>

@@ -1,0 +1,24 @@
+project_id,対象種別：アカウント／投稿／サイト／リポジトリ／製品,対象IDまたはURL,指標名,値,単位,対象期間の開始と終了,数値の取得日時,データ取得元,確認状態,補足
+xautoposter,アカウント,https://x.com/forifori_dev,フォロワー数,1,アカウント,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み（アカウント全体）,Xautoposter単独のフォロワーではない。期間増減は過去記録不足
+xautoposter,アカウント,https://x.com/forifori_dev,フォロー数,24,アカウント,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み（アカウント全体）,プロジェクト別ではない
+xautoposter,アカウント,https://x.com/forifori_dev,公開投稿数,41,投稿,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み（アカウント全体）,全プロジェクト混在。Xautoposter帰属数ではない
+xautoposter,アカウント,https://x.com/forifori_dev,期間中フォロワー増減（直近30日）,,アカウント,2026-08-16〜2026-09-13 JST,2026-09-14 23:52 JST,XプロフィールUI・ローカル履歴,未取得（過去スナップショット不足）,2026-09-14 02:24 JSTに0の記録はあるが連続履歴がなく、増減は推測しない
+xautoposter,投稿,https://x.com/forifori_dev/status/2099186426156073460,表示回数,10,views,現時点（投稿後約21時間）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み,Xautoposter関連現存投稿。ユニーク閲覧者数ではない
+xautoposter,投稿,https://x.com/forifori_dev/status/2099186426156073460,いいね,0,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み,0件はUIで確認した値
+xautoposter,投稿,https://x.com/forifori_dev/status/2099186426156073460,リポスト,0,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み,0件はUIで確認した値
+xautoposter,投稿,https://x.com/forifori_dev/status/2099186426156073460,返信,0,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み,0件はUIで確認した値
+xautoposter,投稿,https://x.com/forifori_dev/status/2099186847436112224,表示回数,13,views,現時点（投稿後約21時間）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み,Xautoposter関連現存投稿。ユニーク閲覧者数ではない
+xautoposter,投稿,https://x.com/forifori_dev/status/2099186847436112224,いいね,0,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み,0件はUIで確認した値
+xautoposter,投稿,https://x.com/forifori_dev/status/2099186847436112224,リポスト,0,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み,0件はUIで確認した値
+xautoposter,投稿,https://x.com/forifori_dev/status/2099186847436112224,返信,0,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み,0件はUIで確認した値
+xautoposter,投稿,https://x.com/forifori_dev/status/2099196727706447915,表示回数,15,views,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み（関連実験）,Xautoposter管理下だが製品固有の発信ではない
+xautoposter,投稿,https://x.com/forifori_dev/status/2099196727706447915,いいね,1,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み（関連実験）,製品成果に直接帰属させない
+xautoposter,投稿,https://x.com/forifori_dev/status/2099196727706447915,リポスト,1,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み（関連実験）,製品成果に直接帰属させない
+xautoposter,投稿,https://x.com/forifori_dev/status/2099196727706447915,返信,0,件,現時点（2026-09-14 23:52 JST）,2026-09-14 23:52 JST,XプロフィールChrome UI,確認済み（関連実験）,製品成果に直接帰属させない
+xautoposter,製品,http://127.0.0.1:8790/,合成デモ投稿数,29,投稿,データセット累計,2026-09-14 23:50 JST,Xautoposter /api/datasets,確認済み（合成データ）,すべて架空。最新Xの成果ではない
+xautoposter,製品,http://127.0.0.1:8790/,合成デモ観測スナップショット数,89,観測,データセット累計,2026-09-14 23:50 JST,Xautoposter /api/datasets/demo/overview,確認済み（合成データ）,最新観測時刻は2026-09-12 15:00 JST。実X成果ではない
+xautoposter,製品,http://127.0.0.1:8790/,公式X APIトークン設定,false,設定フラグ,現時点,2026-09-14 23:50 JST,Xautoposter /api/settings,確認済み（未設定）,paused=true、保存済み収集条件0件、実X収集は未実行
+xautoposter,サイト,http://127.0.0.1:8790/,訪問者数・セッション数,,セッション,直近7日／直近30日,2026-09-14 23:58 JST,計測設定の確認,未取得（外部公開・計測なし）,ローカル動作確認のアクセスを外部成果に含めない
+xautoposter,サイト,http://127.0.0.1:8790/,CTAクリック・登録・問い合わせ,,件,直近7日／直近30日,2026-09-14 23:58 JST,公開先・計測設定の確認,未取得（導線・計測なし）,実行していない登録・問い合わせ・決済を0件としない
+xautoposter,リポジトリ,/Users/shuhei/Projects/Xautoposter,GitHubスター・フォーク・ダウンロード,,件,累計／直近7日／直近30日,2026-09-14 23:58 JST,git remote・公開URLの確認,未取得（公開リポジトリURL未確認）,ローカルファイルの存在を外部利用数とみなさない
+xautoposter,製品,http://127.0.0.1:8790/,試用者・登録者・アクティブユーザー・有料利用者・売上,,利用者／件／円,累計／直近7日／直近30日,2026-09-14 23:58 JST,製品・決済・利用計測の確認,未取得（登録・決済・利用計測なし）,デモ操作と内部アクセスは外部利用成果から除外できる状態
