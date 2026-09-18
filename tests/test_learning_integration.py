@@ -73,3 +73,19 @@ def test_global_pause_blocks_automatic_collection(tmp_path,monkeypatch):
     monkeypatch.setattr(loop.collector,"collect",forbidden)
     asyncio.run(loop.tick())
     assert app.state.store.config("learning_runtime")["state"]=="paused"
+
+
+def test_missed_horizon_stops_without_more_api_spend(tmp_path,monkeypatch):
+    import asyncio
+    app,client,headers,e,bundle=setup(tmp_path)
+    loop=app.state.learning
+    old=(datetime.now(timezone.utc)-timedelta(hours=48)).isoformat()
+    e=loop.workspace.update(e["id"],e["version"],"test expired horizon",lambda item,c:item["publication"].update(published_at=old))
+    loop.configure(e["id"],e["version"],True,True,15)
+    app.state.store.set_config("settings",{"paused":False})
+    async def forbidden(*args): raise AssertionError("expired checkpoint must not trigger an API call")
+    monkeypatch.setattr(loop.collector,"collect",forbidden)
+    asyncio.run(loop.tick())
+    settings=loop.workspace.get(e["id"])["learning"]
+    assert not settings["enabled"] and "観測期限" in settings["error"]
+    assert len(loop.workspace.all())==1

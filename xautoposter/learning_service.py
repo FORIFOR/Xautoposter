@@ -120,7 +120,26 @@ class LearningLoop:
             if time.monotonic() >= deadline:
                 break
             settings = entry.get("learning", {})
-            if not settings.get("enabled") or instant(settings["next_attempt_at"]) > now:
+            if not settings.get("enabled"):
+                continue
+            publication = entry.get("verified_publication") or entry["publication"]
+            horizon = entry["draft"]["horizon_hours"] * 3600
+            closes = instant(publication["published_at"]) + timedelta(seconds=horizon + min(1800, max(300, horizon * .15)))
+            if now > closes:
+                # A late API call cannot recover a missed historical checkpoint.
+                # Stop instead of spending the daily budget indefinitely.
+                evidence = diagnose(entry, [entry])
+                ready = evidence["ready"] and evidence["measurement"]["source"] == "x_api"
+                if ready:
+                    self.propose(entry["id"], automatic=True)
+                latest = self.workspace.get(entry["id"])
+                def expire(current, c):
+                    current["learning"].update(enabled=False,
+                        error=None if ready else "観測期限を過ぎたため自動取得を停止しました。後の数値で補完しません。",
+                        stopped_at=utcnow())
+                self.workspace.update(latest["id"], latest["version"], "観測期限により自動取得を停止", expire)
+                continue
+            if instant(settings["next_attempt_at"]) > now:
                 continue
             # Claim next attempt before IO; source interval + global budget still
             # apply in Collector. The legacy scheduler never owns these sources.
