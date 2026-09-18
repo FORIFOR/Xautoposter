@@ -74,4 +74,6 @@ def create_app(*args, **kwargs):
     async def propose(id: str, value: Version):
         return loop.propose(id, value.version)
 
+    from .authoring import register_authoring
+    register_authoring(app)
     return app
