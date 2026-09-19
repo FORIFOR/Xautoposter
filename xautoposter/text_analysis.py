@@ -31,11 +31,32 @@ def structure(text, media_type):
 
 REACTION_RULES = [
     ("訂正", r"訂正|誤情報|事実と違|正確には|誤り|デマ|correction|incorrect|misleading"),
-    ("反論", r"反対|同意でき|違うと思|とは限ら|疑問が|disagree|not convinced"),
+    ("反論", r"反対(?:です|します|だ|する)|同意でき(?:ない|ません)|違うと思|とは限ら|疑問が|disagree|not convinced"),
     ("質問", r"[?？]|教えて|どうすれば|でしょうか|why\b|how\b"),
     ("経験談", r"私も|自分も|うちも|弊社|現場で|経験|we tried|my experience"),
-    ("同意", r"同感|たしかに|確かに|その通り|賛成|わかる|agree|exactly"),
+    ("同意", r"同意でき(?:ます|る)|同感|たしかに|確かに|その通り|賛成|わかる|agree|exactly"),
 ]
+
+NEGATED_DISAGREEMENT = re.compile(r"反対(?:では|じゃ)(?:ありません|ない)|反対し(?:ません|ない)", re.I)
+
+
+def classify_reaction(text):
+    """Return a conservative label and excerpt.
+
+    Explicitly negated disagreement is treated as agreement only when an
+    affirmative cue is also present. Otherwise it stays unclassified rather
+    than inventing sentiment.
+    """
+    sentences = [s.strip() for s in re.split(r"(?<=[。!?！？])|\n+", text) if s.strip()]
+    for sentence in sentences:
+        if NEGATED_DISAGREEMENT.search(sentence):
+            if re.search(REACTION_RULES[-1][1], sentence, re.I):
+                return "同意", sentence[:400]
+            continue
+        for category, rule in REACTION_RULES:
+            if re.search(rule, sentence, re.I):
+                return category, sentence[:400]
+    return "未分類", text[:400]
 
 
 def reactions(posts):
@@ -43,19 +64,13 @@ def reactions(posts):
     counts["未分類"] = 0
     evidence = []
     for p in posts:
-        sentences = [s for s in re.split(r"(?<=[。!?！？])|\n+", p["text"]) if s.strip()]
-        label, excerpt = "未分類", p["text"][:400]
-        for category, rule in REACTION_RULES:
-            found = next((s for s in sentences if re.search(rule, s, re.I)), None)
-            if found:
-                label, excerpt = category, found[:400]
-                break
+        label, excerpt = classify_reaction(p["text"])
         counts[label] += 1
         evidence.append({"post_id": p["id"], "kind": p["kind"], "category": label, "excerpt": excerpt,
                          "created_at": p["created_at"], "observed_at": p["snapshots"][-1]["observed_at"],
                          "needs_review": True})
-    return {"method": "語句による仮分類・人の確認が必要", "sample_size": len(posts), "counts": counts,
-            "evidence": evidence, "note": "取得した返信・引用の中での傾向です。全返信・閲覧者全体・世論の割合ではありません。皮肉・否定の文脈は誤分類し得ます。"}
+    return {"method": "語句による保守的な仮分類・人の確認が必要", "sample_size": len(posts), "counts": counts,
+            "evidence": evidence, "note": "取得した返信・引用の中での傾向です。全返信・閲覧者全体・世論の割合ではありません。否定・皮肉・複文は曖昧な場合に未分類へ残します。"}
 
 
 def hypotheses(comparison, reaction, features):

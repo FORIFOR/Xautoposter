@@ -75,6 +75,10 @@ class Revision(Strict):
     version: int = Field(ge=1)
 
 
+class SyncRequest(Strict):
+    version: int = Field(ge=1)
+
+
 def metric_value(observation, key):
     if key != "reactions":
         return observation.get(key)
@@ -126,7 +130,7 @@ def report(entry, entries):
     parent = next((p for p in peers if p["id"] == entry["parent_id"]), None)
     return {**result, "comparison_n": len(peers), "peers": peers,
             "parent_difference": result["value"] - parent["value"] if parent else None,
-            "conditions": "同じアカウント・テーマ・形式・評価指標・経過時間、投稿日±7日。手動観測の標本内で比較。",
+            "conditions": "同じアカウント・テーマ・形式・評価指標・経過時間、投稿日±7日。出典を保持した実測の標本内で比較。",
             "caution": "少数の観察比較です。投稿時刻、露出、フォロワーの変化などを統制していないため、変更の効果を断定できません。"}
 
 
@@ -225,6 +229,42 @@ class Experiments:
             entry["review_stale"] = entry["reflection"] is not None
         return self.update(id, observation.version, "反応を手動観測", mutate)
 
+    def sync_from_x_api(self, id, version):
+        """Copy already-collected official X snapshots into the own-post loop.
+
+        This does not make a network request. Collection remains the collector's
+        responsibility, and provenance stays explicit on every copied snapshot.
+        """
+        def mutate(entry, c):
+            if not entry["publication"]:
+                raise ValueError("先に公開URL・公開日時を登録してください")
+            target_id = post_id(entry["publication"]["url"])
+            data = self.store.data("x-live")
+            source = next((p for p in data["posts"] if p["id"] == target_id), None)
+            if not source:
+                raise ValueError("この投稿の公式X API観測がありません。先に収集または再観測してください")
+            added = 0
+            for snapshot in source["snapshots"]:
+                if moment(snapshot["observed_at"]) < moment(entry["publication"]["published_at"]):
+                    continue
+                value = {**{k: snapshot.get(k) for k in METRICS},
+                         "observed_at": snapshot["observed_at"], "response_notes": "",
+                         "source": "x_api", "url": entry["publication"]["url"]}
+                old = next((o for o in entry["observations"] if o["observed_at"] == value["observed_at"]), None)
+                if old:
+                    if any(old.get(k) != value.get(k) for k in METRICS):
+                        raise ValueError("同じ時刻の手動観測と公式API観測が矛盾しています。自動上書きしません")
+                    continue
+                entry["observations"].append(value)
+                added += 1
+            if not added:
+                raise ValueError("新しく同期できる公式API観測はありません")
+            entry["observations"].sort(key=lambda s: s["observed_at"])
+            entry["review_stale"] = entry["reflection"] is not None
+            entry["last_x_api_sync_at"] = utcnow()
+            entry["last_x_api_sync_count"] = added
+        return self.update(id, version, "公式X APIの観測を同期", mutate)
+
     def reflect(self, id, reflection):
         def mutate(entry, c):
             if not entry["observations"]:
@@ -279,6 +319,10 @@ def register_routes(app, store):
     @app.post("/api/experiments/{id}/observations")
     async def observe(id: str, value: Observation):
         return workspace.observe(id, value)
+
+    @app.post("/api/experiments/{id}/sync-x-api")
+    async def sync_x_api(id: str, value: SyncRequest):
+        return workspace.sync_from_x_api(id, value.version)
 
     @app.post("/api/experiments/{id}/reflection")
     async def reflection(id: str, value: Reflection):
